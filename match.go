@@ -120,8 +120,8 @@ func (s *CapStack) Close(end int) (*CaptureEntry, int) {
 // Used when returning the values
 // Similar to CaptureEntry, but without some internal values
 type CaptureResult struct {
-	start, end int
-	value      interface{}
+	Start, End int
+	Value      interface{}
 }
 
 // Pop and return the top `count` captures
@@ -311,7 +311,7 @@ func Match(program *Pattern, input string) (interface{}, error, int) {
 			caps := captures.Pop(captures.top)
 			var ret interface{}
 			if len(caps) > 0 && caps[0] != nil {
-				ret = caps[0].value
+				ret = caps[0].Value
 			}
 			return ret, nil, i
 		}

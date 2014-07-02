@@ -51,7 +51,7 @@ func (h *ListCapture) Process(input string, start, end int, captures *CapStack, 
 	subs := captures.Pop(subcaps)
 	ret := make([]interface{}, len(subs))
 	for i := range subs {
-		ret[i] = subs[i].value
+		ret[i] = subs[i].Value
 	}
 	return ret, nil
 }
@@ -98,7 +98,7 @@ func (h *StringCapture) Process(input string, start, end int, captures *CapStack
 		if err != nil {
 			return "<ERROR>"
 		}
-		return fmt.Sprintf("%v", subs[i].value)
+		return fmt.Sprintf("%v", subs[i].Value)
 	})
 	return ret, err
 }
@@ -113,11 +113,11 @@ func (h *SubstCapture) Process(input string, start, end int, captures *CapStack,
 	ret := make([]string, 0)
 	pos := start
 	for _, c := range subs {
-		if c.start > pos {
-			ret = append(ret, input[pos:c.start])
+		if c.Start > pos {
+			ret = append(ret, input[pos:c.Start])
 		}
-		ret = append(ret, fmt.Sprintf("%v", c.value))
-		pos = c.end
+		ret = append(ret, fmt.Sprintf("%v", c.Value))
+		pos = c.End
 	}
 	if pos < end {
 		ret = append(ret, input[pos:end])
